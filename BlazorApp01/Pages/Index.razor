@@ -2,8 +2,65 @@
 
 <PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="row">
+    <div class="col text-center">
+        <h1>Welcome to our Tool Warehouse</h1>
+    </div>
+</div>
 
-Welcome to your new app.
+<div class="row">
+    <div class="col">
+        <h2>Show all tools in MOCK Database:</h2>
+    </div>
+</div>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead class="thead-light">
+            <tr>
+                <th>Book</th>
+                <th>Description</th>
+                <th>Release Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in books)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@item.ReleaseDate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@code {
+    private List<Book> books { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        books = new List<Book>()
+        {
+            new Book()
+            {
+                Name = "The Pragmatic Programmer",
+                Description = "Authors: Andrew Hunt, David Thomas",
+                ReleaseDate = new DateTime(1999, 11, 19)
+            },
+            new Book()
+            {
+                Name = "Head First C#",
+                Description = "Author: Andrew Stellman",
+                ReleaseDate = new DateTime(2021, 01, 29)
+            },
+            new Book()
+            {
+                Name = "Clean Code",
+                Description = "Author: Robert Martin",
+                ReleaseDate = new DateTime(2008, 08, 01)
+            },
+        };
+    }
+}
