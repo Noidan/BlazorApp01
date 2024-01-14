@@ -4,42 +4,25 @@
 
 <div class="row">
     <div class="col text-center">
-        <h1>Welcome to our Tool Warehouse</h1>
+        <h1>Welcome to our Library</h1>
     </div>
 </div>
 
 <div class="row">
     <div class="col">
-        <h2>Show all tools in MOCK Database:</h2>
+        <h2>Show all books in MOCK Database:</h2>
     </div>
 </div>
 
-<div class="table-responsive">
-    <table class="table table-striped">
-        <thead class="thead-light">
-            <tr>
-                <th>Book</th>
-                <th>Description</th>
-                <th>Release Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in books)
-            {
-                <tr>
-                    <td>@item.Name</td>
-                    <td>@item.Description</td>
-                    <td>@item.ReleaseDate</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+<BookListTable  Books="books" />
+
+<IndividualBook Book="books[0]" />
 
 @code {
-    private List<Book> books { get; set; }
 
-    protected async override Task OnInitializedAsync()
+    List<Book> books;
+
+    protected override void OnInitialized()
     {
         books = new List<Book>()
         {

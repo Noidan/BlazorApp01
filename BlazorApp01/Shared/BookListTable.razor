@@ -1,0 +1,39 @@
+﻿<div class="table-responsive">
+    <table class="table text-light">
+        <thead class="thead-light">
+            <tr>
+                <th>Book</th>
+                <th>Description</th>
+                <th>Release Date</th>
+                <th><input type="checkbox" @onchange="(() => displayButtons = !displayButtons)" /> </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Books == null)
+            {
+                <tr>LOADING...</tr>
+            }
+
+            else if (Books.Count == 0)
+            {
+                <tr> NO ITEMS FOUND</tr>
+            }
+
+            else
+            {
+                @foreach (var item in Books)
+                {
+                    <IndividualBook IsTable=true Book="item" DisplayButtons="displayButtons"/>
+                }
+            }
+
+            
+        </tbody>
+    </table>
+</div>
+
+@code {
+    [Parameter] public List<Book> Books { get; set; }
+
+    bool displayButtons = false;
+}

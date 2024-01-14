@@ -1,0 +1,61 @@
+﻿@if (!IsTable)
+{
+    <div class="row text-center alert text-light bg-dark">
+        <div class="col">
+            <p>@Book.Name</p>
+            <p>@Book.Description</p>
+            <p>@Book.ReleaseDate.ToString("dd.MM.yyyy")</p>
+        </div>
+    </div>
+    @if (DisplayButtons)
+    {
+        <div class="row">
+            <div class="col offset-3">
+                <button class="btn btn-danger" @onclick="Delete">Delete</button>
+            </div>
+            <div class="col">
+                @if (message != null)
+                {
+                    <span class="text-danger">@message</span>
+                    message = null;
+                }
+            </div>
+        </div>
+    }
+   
+}
+else
+{
+    <tr>
+        <td>@Book.Name</td>
+        <td>@Book.Description</td>
+        <td>@Book.ReleaseDate.ToString("dd.MM.yyyy")</td>
+        <td>
+            @if (DisplayButtons)
+            {
+                <button class="btn btn-danger" @onclick="Delete">Delete</button>
+                @if (message != null)
+                {
+                    <span class="text-danger pl-3">@message</span>
+                    message = null;
+                }
+            }
+           
+        </td>
+    </tr>
+}
+
+
+@code {
+    [Parameter] public Book Book { get; set; }
+    [Parameter] public bool IsTable { get; set; }
+    [Parameter] public bool DisplayButtons { get; set; } = false;
+
+    string message;
+
+    void Delete()
+    {
+        //Delete message
+        message = $"Book {Book.Name} deleted!";
+    }
+}
