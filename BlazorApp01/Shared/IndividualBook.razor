@@ -11,14 +11,10 @@
     {
         <div class="row">
             <div class="col offset-3">
-                <button class="btn btn-danger" @onclick="Delete">Delete</button>
+                <button class="btn btn-danger" @onclick="SwitchBook">F5</button>
             </div>
             <div class="col">
-                @if (message != null)
-                {
-                    <span class="text-danger">@message</span>
-                    message = null;
-                }
+
             </div>
         </div>
     }
@@ -33,12 +29,7 @@ else
         <td>
             @if (DisplayButtons)
             {
-                <button class="btn btn-danger" @onclick="Delete">Delete</button>
-                @if (message != null)
-                {
-                    <span class="text-danger pl-3">@message</span>
-                    message = null;
-                }
+                <button class="btn btn-danger" @onclick="(() => DeleteBook.InvokeAsync(Book))">Delete</button>
             }
            
         </td>
@@ -50,12 +41,7 @@ else
     [Parameter] public Book Book { get; set; }
     [Parameter] public bool IsTable { get; set; }
     [Parameter] public bool DisplayButtons { get; set; } = false;
-
-    string message;
-
-    void Delete()
-    {
-        //Delete message
-        message = $"Book {Book.Name} deleted!";
-    }
+    [Parameter] public EventCallback<Book> DeleteBook { get; set; }
+    [Parameter] public EventCallback SwitchBook { get; set; }
+ 
 }

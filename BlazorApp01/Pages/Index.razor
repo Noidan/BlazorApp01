@@ -16,11 +16,14 @@
 
 <BookListTable  Books="books" />
 
-<IndividualBook Book="books[0]" />
+<IndividualBook Book="oneBookToShow" IsTable="false" DisplayButtons="true" SwitchBook="ShowNewBook"/>
 
 @code {
 
     List<Book> books;
+
+    Random rnd;
+    Book oneBookToShow;
 
     protected override void OnInitialized()
     {
@@ -45,5 +48,30 @@
                 ReleaseDate = new DateTime(2008, 08, 01)
             },
         };
+
+        rnd = new Random(DateTime.Now.Millisecond);
+        oneBookToShow = books[rnd.Next(0, books.Count)];
+    }
+
+    void ShowNewBook()
+    {
+        oneBookToShow = SwitchBook();
+    }
+
+    Book SwitchBook()
+    {
+        Book tempBook;
+
+        if (books.Count >= 2)
+        {
+            int iterator = rnd.Next(0, books.Count);
+            tempBook = books[iterator];
+        }
+        else if (books.Count == 1)
+            tempBook = books[0];
+        else
+            return new Book() {Name = "No items in array", ReleaseDate=DateTime.Now};
+
+            return tempBook;
     }
 }
