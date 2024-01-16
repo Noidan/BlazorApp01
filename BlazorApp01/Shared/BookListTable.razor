@@ -9,32 +9,19 @@
             </tr>
         </thead>
         <tbody>
-            @if (Books == null)
-            {
-                <tr>LOADING...</tr>
-            }
-
-            else if (Books.Count == 0)
-            {
-                <tr> NO ITEMS FOUND</tr>
-            }
-
-            else
-            {
-                @foreach (var item in Books)
-                {
-                    <IndividualBook IsTable=true Book="item" DisplayButtons="displayButtons" DeleteBook="DeleteTheBook"/>
-                }
-            }
-
-            
+            <GenericList ListOfItems="Books">
+                <ItemTemplate Context="book">
+                    <IndividualBook Book="book" IsTable="true" DisplayButtons = "displayButtons" DeleteBook="DeleteTheBook" />
+                </ItemTemplate>
+            </GenericList>
         </tbody>
     </table>
 </div>
 
 @code {
     [Parameter] public List<Book> Books { get; set; }
-
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    
     bool displayButtons = false;
 
     void DeleteTheBook(Book book)
