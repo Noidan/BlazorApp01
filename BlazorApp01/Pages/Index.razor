@@ -1,4 +1,5 @@
 ﻿@page "/"
+@inject HttpClient client
 
 <PageTitle>Index</PageTitle>
 
@@ -18,6 +19,13 @@
 
 <IndividualBook Book="oneBookToShow" IsTable="false" DisplayButtons="true" SwitchBook="ShowNewBook"/>
 
+<div class="row">
+    <div class="col text-center">
+        <button @onclick="AddNewBook" class="btn btn-success">Add new book</button>
+    </div>
+
+</div>
+
 @code {
 
     List<Book> books;
@@ -27,7 +35,7 @@
 
     protected async override Task OnInitializedAsync()
     {
-        await Task.Delay(1000);
+        // await Task.Delay(1000);
 
         books = new List<Book>()
         {
@@ -74,6 +82,17 @@
         else
             return new Book() {Name = "No items in array", ReleaseDate=DateTime.Now};
 
-            return tempBook;
+        return tempBook;
+    }
+
+    void AddNewBook()
+    {
+        books.Add(new Book() 
+        {
+                Name = "Test book",
+                Description = "Test description",
+                ReleaseDate = DateTime.Now
+        });
+
     }
 }

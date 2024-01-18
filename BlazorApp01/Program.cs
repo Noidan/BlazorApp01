@@ -1,3 +1,4 @@
+using BlazorApp01;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -6,6 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+
+builder.Services.AddSingleton<SingletonService>();
+builder.Services.AddTransient<TransientService>();
 
 var app = builder.Build();
 
